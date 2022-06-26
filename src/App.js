@@ -40,6 +40,33 @@ export default function App() {
     setChange(change+1);
   }
 
+  function downloadCSV(){
+
+    let csv = tableHeader.join(',');
+    csv+="\n";
+
+    tableData.forEach(function (row) {
+      csv += row.join(",");
+      csv += "\n";
+    });
+
+    console.log(csv);
+
+
+
+    //display the created CSV data on the web browser
+    // document.write(csv);
+
+    var hiddenElement = document.createElement("a");
+    hiddenElement.href = "data:text/csv;charset=utf-8," + encodeURI(csv);
+    hiddenElement.target = "_blank";
+
+    //provide the name for the CSV file to be downloaded
+    hiddenElement.download = "csv file.csv";
+    hiddenElement.click();  
+  }
+
+
   return (
     <div className="App">
       <h2>CSV Maker</h2>
@@ -86,6 +113,10 @@ export default function App() {
 
       <div>
         <button onClick={addNewRow}>Add New Row</button>
+      </div>
+
+      <div>
+        <button onClick={downloadCSV}>Download CSV file</button>
       </div>
     </div>
   );
