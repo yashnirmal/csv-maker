@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 
 export default function App() {
@@ -41,7 +41,7 @@ export default function App() {
   }
 
   function downloadCSV(){
-
+    
     let csv = tableHeader.join(',');
     csv+="\n";
 
@@ -49,13 +49,6 @@ export default function App() {
       csv += row.join(",");
       csv += "\n";
     });
-
-    console.log(csv);
-
-
-
-    //display the created CSV data on the web browser
-    // document.write(csv);
 
     var hiddenElement = document.createElement("a");
     hiddenElement.href = "data:text/csv;charset=utf-8," + encodeURI(csv);
@@ -92,8 +85,9 @@ export default function App() {
             ))}
           </tr>
 
+          
           {tableData.map((arr, superindex) => (
-            <tr>
+            <tr className='table-data-row'>
               {arr.map((el, index) => (
                 <td>
                   <input type="text" value={el} onChange={(e)=>{
